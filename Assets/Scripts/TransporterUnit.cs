@@ -12,6 +12,8 @@ public class TransporterUnit : Unit
     private Building m_CurrentTransportTarget;
     private Building.InventoryEntry m_Transporting = new Building.InventoryEntry();
 
+    private bool m_IsOn = false;
+
     // We override the GoTo function to remove the current transport target, as any go to order will cancel the transport
     public override void GoTo(Vector3 position)
     {
@@ -59,5 +61,21 @@ public class TransporterUnit : Unit
     {
         if (m_Transporting.Count > 0)
             content.Add(m_Transporting);
+    }
+
+    // ABSTRACTION
+    public void TurnOn() {
+        IsOn = true;
+    }
+
+    // ABSTRACTION
+    public void TurnOff() {
+        IsOn = false;
+    }
+
+    // ENCAPSULATION
+    public bool IsOn {
+        get { return m_IsOn; }
+        private set { m_IsOn = value; }
     }
 }
